@@ -4,7 +4,8 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils";
 
-import { ConvexClientProvider } from "./ConvexClientProvider";
+import { ClerkProvider } from '@clerk/nextjs'
+import ConvexClientProvider from '@/components/ConvexClientProvider'
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'})
 
@@ -26,9 +27,11 @@ export default function RootLayout({
     >
       <body>
         <ThemeProvider>
-          <ConvexClientProvider>
-            {children}
-          </ConvexClientProvider>
+          <ClerkProvider>
+            <ConvexClientProvider>
+              {children}
+            </ConvexClientProvider>
+          </ClerkProvider>
         </ThemeProvider>
       </body>
     </html>
