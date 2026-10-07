@@ -7,6 +7,9 @@ import { cn } from "@/lib/utils";
 import { ClerkProvider } from '@clerk/nextjs'
 import ConvexClientProvider from '@/components/ConvexClientProvider'
 
+import Header from '@/components/header'
+import Footer from '@/components/footer'
+
 const geist = Geist({subsets:['latin'],variable:'--font-sans'})
 
 const fontMono = Geist_Mono({
@@ -25,11 +28,15 @@ export default function RootLayout({
       suppressHydrationWarning
       className={cn("antialiased", fontMono.variable, "font-sans", geist.variable)}
     >
-      <body>
+      <body className="min-h-dvh flex flex-col">
         <ThemeProvider>
           <ClerkProvider>
             <ConvexClientProvider>
-              {children}
+              <Header />
+              <main className="flex flex-1 flex-col">
+                {children}
+              </main>
+              <Footer />
             </ConvexClientProvider>
           </ClerkProvider>
         </ThemeProvider>
